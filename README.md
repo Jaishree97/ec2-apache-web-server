@@ -15,12 +15,13 @@ http://18.116.81.164
 🏗️ Architecture Overview
 
 Infrastructure Components:
+* Compute: Amazon EC2 (t3.micro – Free Tier eligible)
+* Operating System: Amazon Linux
+* Web Server: Apache HTTP Server (httpd) / Nginx
+* Protocol: HTTP (Port 80)
+* Remote Access: SSH (Port 22)
 
-Compute: Amazon EC2 (t3.micro – Free Tier eligible)
-Operating System: Amazon Linux
-Web Server: Apache HTTP Server (httpd) / Nginx
-Protocol: HTTP (Port 80)
-Remote Access: SSH (Port 22)
+
 Architecture Flow:
 User Browser → Public IP → EC2 Instance → Apache/Nginx → Static HTML Website
 
