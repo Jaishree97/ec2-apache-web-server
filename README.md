@@ -1,157 +1,178 @@
-# EC2 Apache / Nginx Web Server Deployment
+EC2 Apache / Nginx Web Server Deployment on AWS
+📌 Project Overview
 
-## Overview
+This project demonstrates how to deploy a web server on Amazon EC2 using Apache HTTP Server (httpd) or Nginx.
+The goal is to understand key AWS infrastructure concepts such as EC2 provisioning, security groups, SSH access, and Linux server management while hosting a static website accessible over the internet.
 
-This project demonstrates how to deploy a **production-ready web server** on **AWS EC2** using **Apache (httpd)** or **Nginx**. The server hosts a static website and is publicly accessible via HTTP.
+🌍 Live Demo
 
-This project highlights hands-on experience in **cloud infrastructure provisioning, Linux server administration, web server configuration, and security best practices**.
+🔗 Website URL:
 
----
+http://18.116.81.164
 
-## Live Architecture Flow
 
-User Browser → Public IP → AWS EC2 → Apache/Nginx → Static Website
+(Replace this IP if your instance changes)
 
----
+🏗️ Architecture Overview
 
-## Tech Stack
+Compute: Amazon EC2 (t3.micro – Free Tier eligible)
 
-* AWS EC2
-* Amazon Linux / Ubuntu
-* Apache (httpd) or Nginx
-* SSH & Linux CLI
-* Git & GitHub
+Operating System: Amazon Linux
 
----
+Web Server: Apache HTTP Server (httpd) / Nginx
 
-## Repository Structure
+Protocol: HTTP (Port 80)
 
-```
+Remote Access: SSH (Port 22)
+
+The EC2 instance acts as a virtual server where a web server is installed and configured to serve a static HTML page using the instance’s public IPv4 address.
+
+🛠️ Tech Stack
+
+AWS EC2
+
+Amazon Linux
+
+Apache (httpd) / Nginx
+
+SSH & Linux CLI
+
+Git & GitHub
+
+📁 Repository Structure
 ec2-apache-web-server/
 ├── index.html
 ├── README.md
-└── setup-commands.txt
-```
+├── setup-commands.txt
+└── screenshots/
 
----
+⭐ Key Features
 
-## Key Features
+EC2 instance provisioning
 
-* EC2 instance provisioning
-* Secure SSH access using key pairs
-* Apache/Nginx web server setup
-* Static website hosting
-* Security Group configuration (HTTP & SSH)
-* Auto-start configuration on reboot
+Secure SSH access using key pairs
 
----
+Apache/Nginx web server setup
 
-## Step-by-Step Deployment Guide
+Static website hosting
 
-### 1. Launch an EC2 Instance
+Security Group configuration (HTTP & SSH)
 
-* AMI: Amazon Linux 2 or Ubuntu
-* Instance Type: t2.micro (Free Tier eligible)
-* Security Group Rules:
+Auto-start configuration on reboot
 
-  * SSH → Port 22
-  * HTTP → Port 80
+🚀 Step-by-Step Deployment Guide
+1. Launch an EC2 Instance
 
----
+Created an EC2 instance using Amazon Linux AMI
 
-### 2. Connect to EC2 via SSH
+Selected instance type: t3.micro (Free Tier eligible)
 
-```bash
-ssh -i your-key.pem ec2-user@<EC2-PUBLIC-IP>
-```
+Created and downloaded a key pair
 
-(Use `ubuntu` user for Ubuntu AMI)
+Configured Security Group to allow:
 
----
+SSH → Port 22
 
-### 3. Install Apache Web Server
+HTTP → Port 80
 
-```bash
+2. Connect to EC2 via SSH
+ssh -i your-key.pem ec2-user@18.116.81.164
+
+3. Install Apache Web Server
 sudo yum update -y
 sudo yum install httpd -y
 sudo systemctl start httpd
 sudo systemctl enable httpd
-```
+sudo systemctl status httpd
 
-### OR Install Nginx
 
-```bash
-sudo yum install nginx -y
-sudo systemctl start nginx
-sudo systemctl enable nginx
-```
+Expected output:
 
----
+active (running)
 
-### 4. Deploy Website Content
+4. Deploy Website Content
+sudo echo "<h1>Welcome to My EC2 Web Server</h1>" > /var/www/html/index.html
 
-```bash
-sudo echo "<h1>Welcome to My EC2 Web Server</h1>" | sudo tee /var/www/html/index.html
-```
+5. Access Website
 
-For Nginx:
+Open browser:
 
-```bash
-sudo echo "<h1>Welcome to My EC2 Web Server</h1>" | sudo tee /usr/share/nginx/html/index.html
-```
+http://18.116.81.164
 
----
 
-### 5. Access Website
+The page displays the custom welcome message, confirming the server is working.
 
-```
-http://<EC2-PUBLIC-IP>
-```
+🔐 Security Configuration
 
----
+AWS Security Group allows inbound HTTP (80) and SSH (22)
 
-## Security Configuration
+IAM and EC2 key pairs ensure secure authentication
 
-* AWS Security Group allows inbound HTTP (80) and SSH (22)
-* IAM and EC2 key pairs ensure secure access
-* Public access restricted to required ports only
+Public access limited to required ports only
 
----
+✅ Verification Checklist
 
-## Learning Outcomes
+EC2 instance state: Running
 
-* Real-world AWS EC2 deployment
-* Linux web server administration
-* Git & GitHub project version control
-* Cloud networking & security fundamentals
+Apache service status: Active (running)
 
----
+Port 80 allowed in inbound rules
 
-## Real-World Use Cases
+Website accessible via browser using public IP
 
-* Hosting static websites
-* Deploying backend services
-* Reverse proxy configuration
-* Entry-level DevOps infrastructure projects
+📸 Project Screenshots
+### EC2 Instance Running
+![EC2 Running](screenshots/ec2-instance-running.png)
 
----
+### Security Group Inbound Rules
+![Security Group](screenshots/security-group-inbound-rules.png)
 
-## Interview-Ready Summary
+### SSH Connection to EC2
+![SSH Login](screenshots/ssh-connection.png)
+
+### Apache Service Status
+![Apache Status](screenshots/apache-status.png)
+
+### Website Output
+![Website Output](screenshots/webpage-output.png)
+
+
+📚 Learning Outcomes
+
+Real-world AWS EC2 deployment
+
+Linux web server administration
+
+Git & GitHub version control
+
+Cloud networking & security fundamentals
+
+🌍 Real-World Use Cases
+
+Hosting static websites
+
+Deploying backend services
+
+Reverse proxy configuration
+
+Entry-level DevOps infrastructure projects
+
+🎯 Interview-Ready Summary
 
 I deployed a public web server on AWS EC2 by configuring security groups, installing Apache/Nginx, hosting a static webpage, and ensuring service persistence across reboots. This project demonstrates cloud infrastructure provisioning, Linux system management, and production-ready deployment skills.
 
----
+🔮 Future Enhancements
 
-## Author
+Assign Elastic IP
 
-**Jaishree Chaure**
+Add custom domain using Route 53
 
----
+Enable HTTPS using SSL/TLS
 
-## Future Enhancements
+Configure Load Balancer
 
-* Add Elastic IP
-* Enable HTTPS with SSL
-* Configure Nginx reverse proxy
-* Add Load Balancer (ALB)
-* CI/CD deployment pipeline
+Automate deployment with User Data / Shell Script
+
+👩‍💻 Author
+
+Jaishree Chaure
